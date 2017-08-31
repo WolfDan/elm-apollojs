@@ -3,7 +3,7 @@ port module Ports exposing (..)
 import Json.Decode exposing (Value)
 
 
-port queryUserAndSubReddit : Maybe String -> Cmd msg
+port queryUserAndSubReddit : ( String, String ) -> Cmd msg
 
 
 port setUser : (Value -> msg) -> Sub msg

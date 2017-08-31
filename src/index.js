@@ -7,17 +7,18 @@ import gql from 'graphql-tag';
 var Elm = require('./Main');
 var app = Elm.Main.fullscreen();
 
-app.ports.queryUserAndSubReddit.subscribe(function () {
+app.ports.queryUserAndSubReddit.subscribe(function (keyValue) {
+  var [username, subredditName] = keyValue
   client.query({
     query: gql`
       {
         reddit {
-          user(username: "kn0thing") {
+          user(username: "${username}") {
             username
             commentKarma
             createdISO
           }
-          subreddit(name: "movies"){
+          subreddit(name: "${subredditName}"){
             newListings(limit: 2) {
               title
               comments {
@@ -34,14 +35,11 @@ app.ports.queryUserAndSubReddit.subscribe(function () {
     `
   })
     .then(response => {
-      console.log(response.data.reddit)
       let reddit = response.data.reddit
       if (reddit.user) {
-        console.log("Is user!")
         app.ports.setUser.send(reddit.user)
       }
       if (reddit.subreddit.newListings) {
-        console.log("Is newListings!")
         app.ports.setNewListing.send(reddit.subreddit)
       }
     })

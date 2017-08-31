@@ -90,7 +90,7 @@ update message model =
             { model | err = Just err } ! []
 
         Query ->
-            ( model, Ports.queryUserAndSubReddit Nothing )
+            ( model, Ports.queryUserAndSubReddit ( "kn0thing", "movies" ) )
 
 
 
