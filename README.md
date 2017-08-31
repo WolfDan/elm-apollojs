@@ -1,6 +1,6 @@
 # Elm and ApolloJS!!!
 
-This repository is a proof of implementation of Elm with Apollojs
+This repository is a really basic proof of implementation of Elm with Apollojs
 
 # Dependencies
 
